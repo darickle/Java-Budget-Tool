@@ -39,13 +39,49 @@ public class CalculateButtonListener implements ActionListener {
             }
 
             BudgetCalculator.BudgetResult budgetResult = BudgetCalculator.calculateBudget(monthlyIncome, housing, utilities, transportation, groceries, insurance, other);
-            String resultText = String.format("<html>Your needs consume %.2f%% of your income per month<br>" + "%.2f%% ($%.2f) should be allocated towards wants per month<br>" + "%.2f%% ($%.2f) should be allocated towards savings per month<br>", budgetResult.needsPercentage, budgetResult.wantsPercentage, budgetResult.wants, budgetResult.savingsPercentage, budgetResult.savings);
+            String resultText = "";
             switch (frequency) {
                 case 1:
-                    resultText += String.format("Since you get paid weekly, set aside $%.2f per paycheck for savings", budgetResult.savings / 4);
+                    resultText = String.format("<html>Your needs consume %.2f%% of your income per month<br>" +
+                            "%.2f%% ($%.2f) should be allocated towards wants per month<br>" +
+                            "%.2f%% ($%.2f) should be allocated towards savings per month<br><br>" +
+                            "Since you get paid weekly, set aside $%.2f per paycheck for expenses<br>" +
+                            "Since you get paid weekly, set aside $%.2f per paycheck for wants<br>" +
+                            "Since you get paid weekly, set aside $%.2f per paycheck for savings</html>",
+                            budgetResult.needsPercentage,
+                            budgetResult.wantsPercentage, budgetResult.wants,
+                            budgetResult.savingsPercentage, budgetResult.savings,
+                            totalExpenses / 4,
+                            budgetResult.wants / 4,
+                            budgetResult.savings / 4);
                     break;
                 case 2:
-                    resultText += String.format("Since you get paid biweekly, set aside $%.2f per paycheck for savings", budgetResult.savings / 2);
+                    resultText = String.format("<html>Your needs consume %.2f%% of your income per month<br>" +
+                            "%.2f%% ($%.2f) should be allocated towards wants per month<br>" +
+                            "%.2f%% ($%.2f) should be allocated towards savings per month<br><br>" +
+                            "Since you get paid biweekly, set aside $%.2f per paycheck for expenses<br>" +
+                            "Since you get paid biweekly, set aside $%.2f per paycheck for wants<br>" +
+                            "Since you get paid biweekly, set aside $%.2f per paycheck for savings</html>",
+                            budgetResult.needsPercentage,
+                            budgetResult.wantsPercentage, budgetResult.wants,
+                            budgetResult.savingsPercentage, budgetResult.savings,
+                            totalExpenses / 2,
+                            budgetResult.wants / 2,
+                            budgetResult.savings / 2);
+                    break;
+                case 3:
+                    resultText = String.format("<html>Your needs consume %.2f%% of your income per month<br>" +
+                            "%.2f%% ($%.2f) should be allocated towards wants per month<br>" +
+                            "%.2f%% ($%.2f) should be allocated towards savings per month<br><br>" +
+                            "Set aside $%.2f per paycheck for expenses<br>" +
+                            "Set aside $%.2f per paycheck for wants<br>" +
+                            "Set aside $%.2f per paycheck for savings</html>",
+                            budgetResult.needsPercentage,
+                            budgetResult.wantsPercentage, budgetResult.wants,
+                            budgetResult.savingsPercentage, budgetResult.savings,
+                            totalExpenses,
+                            budgetResult.wants,
+                            budgetResult.savings);
                     break;
             }
             resultLabel.setText(resultText);

@@ -10,7 +10,7 @@ public class BudgetTool extends JFrame {
 
     public BudgetTool() {
         setTitle("Budget Tool");
-        setSize(600, 475);
+        setSize(600, 525);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
