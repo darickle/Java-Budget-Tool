@@ -32,6 +32,11 @@ public class CalculateButtonListener implements ActionListener {
             double groceries = BudgetCalculator.getValidDoubleInput(groceriesField.getText());
             double insurance = BudgetCalculator.getValidDoubleInput(insuranceField.getText());
             double other = BudgetCalculator.getValidDoubleInput(otherField.getText());
+            double totalExpenses = housing + utilities + transportation + groceries + insurance + other;
+            if (totalExpenses > monthlyIncome) {
+                resultLabel.setText("<html>Total expenses exceed your income.<br>Please review your finances.</html>");
+                return;
+            }
 
             BudgetCalculator.BudgetResult budgetResult = BudgetCalculator.calculateBudget(monthlyIncome, housing, utilities, transportation, groceries, insurance, other);
             String resultText = String.format("<html>Your needs consume %.2f%% of your income per month<br>" + "%.2f%% ($%.2f) should be allocated towards wants per month<br>" + "%.2f%% ($%.2f) should be allocated towards savings per month<br>", budgetResult.needsPercentage, budgetResult.wantsPercentage, budgetResult.wants, budgetResult.savingsPercentage, budgetResult.savings);
